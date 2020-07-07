@@ -19,7 +19,6 @@ package de.whs.ibci.msc.model;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectStreamException;
 import java.io.Serializable;
 import java.util.EnumMap;
 import java.util.Iterator;
@@ -145,26 +144,6 @@ public class HistogramDataManager implements Serializable {
         this.nativeDataList.add(tmpResult);
     }
     //</editor-fold>
-    public synchronized ByteArrayOutputStream getObjectAsByteStream() throws IOException {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-        baos.write(toBytes(this.inputFile1.length()));
-        baos.write(this.inputFile1.getBytes());
-        baos.write(toBytes(this.inputFile2.length()));
-        baos.write(this.inputFile2.getBytes());
-        
-        return baos;
-    }
-    private byte[] toBytes(int i) {
-        byte[] result = new byte[4];
-
-        result[0] = (byte) (i >> 24);
-        result[1] = (byte) (i >> 16);
-        result[2] = (byte) (i >> 8);
-        result[3] = (byte) (i /*>> 0*/);
-
-        return result;
-    }
     //<editor-fold defaultstate="collapsed" desc="- Public properties">
     /**
      * Get the number of data that were added to the data set
